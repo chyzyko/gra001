@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Czołg kontra UFO</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
+    canvas {
+      display: block;
+      background: #000;
+    }
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameWrapper">
+    <div id="menu">
+      <h1>🚀 Czołg kontra UFO</h1>
+      <p>Wybierz tryb gry:</p>
+      <select id="themeSelect" onchange="checkOptionsSelected()">
+        <option value="">-- wybierz --</option>
+        <option value="day">Dzień</option>
+        <option value="night">Noc</option>
+      </select>
+
+      <p>Kolor czołgu:</p>
+      <input type="color" id="tankColor" onchange="checkOptionsSelected()">
+
+      <p>Długość lufy:</p>
+      <input type="range" id="barrelLength" min="10" max="60" oninput="checkOptionsSelected()">
+
+      <div id="difficultyButtons">
+        <p>Poziom trudności:</p>
+        <button onclick="startGame('easy')" disabled>Łatwy</button>
+        <button onclick="startGame('medium')" disabled>Średni</button>
+        <button onclick="startGame('hard')" disabled>Trudny</button>
+      </div>
+    </div>
+
+    <div id="gameover" style="display:none;">
+      <h1>Przegrana!</h1>
+      <p id="finalScore"></p>
+      <p id="bestScore"></p>
+      <button onclick="restart()">Zagraj ponownie</button>
+    </div>
+
+    <canvas id="game"></canvas>
+  </div>
+
+  <!-- Dźwięki -->
+  <audio id="shootSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_06dd9d8c81.mp3" preload="auto"></audio>
+  <audio id="explosionSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_975798db15.mp3" preload="auto"></audio>
+  <audio id="hitSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_88e99e1b7a.mp3" preload="auto"></audio>
+  <audio id="bgMusic" src="https://cdn.pixabay.com/download/audio/2023/03/27/audio_593fed689f.mp3" preload="auto" loop></audio>
+
+  <script src="game.js"></script>
+</body>
+</html>
